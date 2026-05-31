@@ -2,20 +2,20 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="relative min-h-[calc(100vh-76px)] overflow-hidden bg-[#f8fbf4]">
-      {/* Background Image */}
+    <main className="relative overflow-hidden bg-[#f8fbf4]">
+      {/* Full Screen Background */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/hero-bg.png')",
         }}
       />
 
-      {/* Soft overlay for readability */}
-      <div className="absolute inset-0 bg-white/15" />
+      {/* Soft Overlay */}
+      <div className="fixed inset-0 bg-white/15" />
 
       {/* Content */}
-      <section className="relative z-10 flex min-h-[calc(100vh-76px)] flex-col items-center justify-center px-6 py-16 text-center">
+      <section className="relative z-10 flex min-h-[calc(100vh-120px)] flex-col items-center justify-center px-6 py-20 text-center">
         {/* Hero Title */}
         <div className="flex flex-wrap items-center justify-center text-5xl font-extrabold tracking-tight text-[#0b4a29] drop-shadow-sm sm:text-7xl md:text-8xl">
           <span>AI</span>
