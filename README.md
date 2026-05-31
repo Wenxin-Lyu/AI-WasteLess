@@ -10,6 +10,7 @@ AI🌿WasteLess is an AI-powered zero-waste meal planning app that transforms gr
 Students, young professionals, and small households often overbuy groceries, forget ingredients they already purchased, and struggle to plan meals around perishable food before expiration.
 
 This creates unnecessary food waste, higher grocery costs, and inefficient household consumption behavior.
+
 ---
 
 ## Current MVP
