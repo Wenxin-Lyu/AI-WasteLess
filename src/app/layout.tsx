@@ -36,18 +36,21 @@ export default function RootLayout({
       <body className="min-h-screen bg-[#f6fff0] text-[#1f3b1f]">
         <header
           className="
-            sticky top-0 z-50
-            w-full
+            sticky top-4 z-50
+            mx-auto
+            w-[94%]
+            max-w-7xl
+            rounded-[2rem]
             bg-white/92
-            backdrop-blur-md
-            border-b border-green-100
-            shadow-sm
+            backdrop-blur-xl
+            border border-white/70
+            shadow-[0_10px_40px_rgba(80,120,80,0.12)]
           "
           style={{
             paddingTop: "env(safe-area-inset-top)",
           }}
         >
-          <div className="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
+          <div className="px-6 py-4 flex items-center justify-between">
             <Link
               href="/"
               className="flex items-center gap-3 hover:opacity-90 transition"
@@ -60,7 +63,7 @@ export default function RootLayout({
                 className="rounded-xl"
               />
 
-              <span className="text-2xl font-bold tracking-tight text-[#245c2e]">
+              <span className="text-3xl font-extrabold tracking-tight text-[#245c2e]">
                 WasteLess
               </span>
             </Link>
@@ -68,7 +71,7 @@ export default function RootLayout({
             <Link
               href="/about"
               className="
-                text-[15px]
+                text-lg
                 font-semibold
                 text-[#245c2e]
                 hover:text-[#4f9f38]
