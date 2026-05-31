@@ -2,57 +2,43 @@
 
 **Keep the receipt. We handle the rest.**
 
-AI🌿WasteLess is an AI-powered zero-waste meal planning app that turns grocery receipts into personalized food waste reduction suggestions.
-
-The project helps students, young professionals, and independent households reduce food waste, save money, and build more sustainable grocery habits.
+AI🌿WasteLess is an AI-powered zero-waste meal planning app that transforms grocery receipts into low-waste meal recommendations and grocery insights.
 
 ---
-
 ## Problem
 
-Many students and young adults often:
+Students, young professionals, and small households often overbuy groceries, forget ingredients they already purchased, and struggle to plan meals around perishable food before expiration.
 
-- buy too much food
-- forget what they already bought
-- let ingredients expire
-- struggle with meal planning
-- repeat unnecessary grocery purchases
-
-This leads to food waste, extra spending, and higher environmental impact.
-
+This creates unnecessary food waste, higher grocery costs, and inefficient household consumption behavior.
 ---
 
 ## Current MVP
 
-This is a lightweight MVP focused on one clear user flow:
+The MVP focuses on lightweight AI-powered grocery understanding, waste-risk estimation, and low-waste meal planning through a session-based multi-agent workflow.
+
+Current AI architecture combines OCR, rule-based reasoning, and category-level food intelligence without persistent inventory tracking or long-term memory.
+
+The current user flow is: 
 
 ```text
-Upload Receipt
-↓
-Receipt Analysis Agent
-↓
-Expiration Agent
-↓
-Meal Planning Agent
-↓
-AI Dashboard
-↓
-User Confirmation
-↓
+Upload Receipt 
+↓ 
+OCR.space 
+↓ 
+Receipt Validation 
+↓ 
+Receipt Analysis Agent 
+↓ 
+Expiration Agent 
+↓ 
+Meal Planning Agent 
+↓ 
+AI Dashboard 
+↓ 
+User Confirmation 
+↓ 
 Updated Recommendation
 ```
-
-The current version focuses on:
-
-- receipt upload experience
-- AI processing workflow UI
-- ingredient and waste-risk demo logic
-- meal planning dashboard
-- cooked / wasted user confirmation
-- sustainability-focused product experience
-
-Some dashboard content currently uses demo data and rule-based logic for presentation.
-
 ---
 
 ## Core AI Workflow
@@ -61,8 +47,9 @@ Some dashboard content currently uses demo data and rule-based logic for present
 
 Responsible for:
 
-- OCR
+- OCR text parsing
 - ingredient detection
+- food category matching
 - quantity understanding
 - purchase time extraction
 
@@ -84,54 +71,42 @@ Responsible for:
 - smart shopping suggestion
 
 ---
+ 
+## Receipt Validation 
 
-## Product Pages
+Uploaded images are validated before entering the AI workflow to reduce false OCR detection from non-receipt images. The current OCR workflow primarily supports English receipts with partial German receipt support. 
 
-### Landing Page
+---
 
-Introduces the product:
+## Food Category Knowledge Base
 
-- logo
-- slogan
-- product value
-- Start Now button
-
-### Receipt Upload Page
-
-Supports:
-
-- grocery receipt upload
-- mobile photo upload
-- up to 10 receipt images
-- AI processing state
-- step-by-step agent workflow
-- OCR failure UI
-
-### AI Dashboard
-
-Includes:
-
-- Today’s Priority
-- Weekly Meal Plan
-- AI Insight
+foodCategories.ts is a shared rule-based food knowledge system used across all Agents to generalize ingredient recognition and reduce dependency on fixed ingredient lists.
 
 ---
 
 ## Commercialization UI
 
-The MVP includes lightweight commercialization entry points as UI concepts and does not include real payment or marketplace integration yet.
+The MVP includes early-stage commercialization concepts designed around sustainable grocery behavior and low-waste household support.
 
-### Smart Refill
+Potential monetization directions include:
 
-Suggests ingredient refill options when essential groceries may run low.
+- Smart Refill recommendations
+- low-waste grocery bundles
+- kitchen tool recommendations
+- sustainability-focused shopping support
 
-### Zero-Waste Grocery Bundle
+---
 
-Suggests low-waste grocery bundles with home delivery based on users’ cooking habits.
+## Architecture
 
-### Kitchen Recommendations
+Main system modules:
 
-Suggests kitchen tools and meal prep equipment that may help users cook more efficiently and reduce food waste.
+- route.ts
+- receiptValidator.ts
+- receiptAnalysisAgent.ts
+- expirationAgent.ts
+- mealPlanningAgent.ts
+- foodCategories.ts 
 
 ---
 
@@ -143,14 +118,6 @@ Suggests kitchen tools and meal prep equipment that may help users cook more eff
 - GitHub
 - Vercel
 
-Planned data / AI sources:
-
-- OCR.space
-- USDA FoodData Central
-- Kaggle Shelf Life Dataset
-- Food.com Recipes Dataset
-- UNEP Food Waste Index
-
 ---
 
 ## Sustainability Goals
@@ -160,66 +127,16 @@ AI-WasteLess supports:
 - **SDG 12 — Responsible Consumption and Production**
 - **SDG 13 — Climate Action**
 
-
----
-
-## Current Version
-
-A lightweight MVP focused on receipt understanding, waste-risk estimation, AI-powered meal planning, and sustainability-focused dashboard interaction.
-
 ---
 
 ## Future Vision
 
-In the future, AI-WasteLess can expand into a fuller AI kitchen assistant with:
+Future development directions include:
 
-### Inventory Tracking Agent
-
-Future responsibilities:
-
-- ingredient inventory tracking
-- cooked / wasted confirmation
-- automatic ingredient deduction
-- waste event logging
-
-### Smart Shopping Agent
-
-Future responsibilities:
-
-- refill reminders
-- grocery recommendations
-- kitchen tool suggestions
-- low-waste shopping support
-
-### Machine Learning: Food Waste Prediction
-
-Future AI direction:
-
-- use food waste prediction to identify high-risk ingredients
-- possible model direction: XGBoost
-- prediction inputs may include ingredient type, storage time, purchase frequency, meal prep frequency, quantity, and historical waste behavior
-
-### Future Business Ecosystem
-
-Potential future commercialization opportunities:
-
-- smart grocery delivery partnerships
-- low-waste grocery subscription bundles
-- personalized kitchen product recommendations
-- sustainability-focused affiliate marketplace
-- AI-powered grocery ecosystem integration
-- premium personalized meal planning features
-
----
-
-## Long-Term Vision
-
-We are starting with food waste reduction.
-
-The long-term vision is an intelligent sustainable kitchen ecosystem with:
-
-- smart refill automation
-- personalized sustainability analytics
-- AI shopping assistant
+- inventory tracking and persistent ingredient memory
+- AI-powered food waste prediction
+- personalized shopping assistance
+- sustainability analytics
 - grocery ecosystem integration
-- full AI-powered kitchen operating system
+
+Potential future AI expansion may include machine learning models for food waste prediction based on ingredient type, storage time, quantity, purchase behavior, and household cooking patterns.

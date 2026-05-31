@@ -16,15 +16,15 @@ const steps = [
     title: "⏳ Step 2：Expiration Agent",
     items: [
       "High-risk ingredients identified",
-      "Estimated freshness timeline generated",
+      "Freshness timeline generated",
       "Waste risk estimation completed",
     ],
   },
   {
     title: "🍽️ Step 3：Meal Planning Agent",
     items: [
-      "Meal plan generated based on ingredient priority",
-      "Meal prep recommendations generated",
+      "Today’s priority ingredient selected",
+      "Personalized meal plan generated",
       "Smart shopping suggestions generated",
     ],
   },
@@ -84,12 +84,43 @@ export default function UploadPage() {
     setOcrFailed(false);
   }
 
-  function startAnalysis() {
+  async function startAnalysis() {
     if (selectedFiles.length === 0) return;
 
     setIsProcessing(true);
     setVisibleItems(0);
     setOcrFailed(false);
+
+    try {
+      const formData = new FormData();
+
+      formData.append("image", selectedFiles[0]);
+
+      const response = await fetch("/api/ocr", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      console.log("OCR RESULT:", data);
+
+      if (!response.ok || !data.success) {
+        setVisibleItems(1);
+        setOcrFailed(true);
+        return;
+      }
+
+      localStorage.setItem(
+        "aiWasteLessResult",
+        JSON.stringify(data)
+      );
+
+    } catch (error) {
+      console.error("OCR ERROR:", error);
+      setVisibleItems(1);
+      setOcrFailed(true);
+    }
 
     setTimeout(() => {
       processingRef.current?.scrollIntoView({
@@ -114,6 +145,8 @@ export default function UploadPage() {
 
   useEffect(() => {
     if (!isProcessing) return;
+
+    if (ocrFailed) return;
 
     if (shouldFail) {
       if (visibleItems >= 1) {
@@ -140,13 +173,29 @@ export default function UploadPage() {
   useEffect(() => {
     if (!isProcessing) return;
 
-    setTimeout(() => {
-      bottomRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-      });
-    }, 120);
-  }, [visibleItems, isProcessing, ocrFailed]);
+    const isSuccessComplete = !ocrFailed && visibleItems >= totalItems;
+    const isFailureComplete = ocrFailed && visibleItems >= 1;
+    const shouldScrollToBottom = isSuccessComplete || isFailureComplete;
+
+    const timer = setTimeout(
+      () => {
+        if (shouldScrollToBottom) {
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: "smooth",
+          });
+        } else {
+          bottomRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+          });
+        }
+      },
+      shouldScrollToBottom ? 500 : 120
+    );
+
+    return () => clearTimeout(timer);
+  }, [visibleItems, isProcessing, ocrFailed, totalItems]);
 
   let currentIndex = 0;
 
@@ -194,6 +243,15 @@ export default function UploadPage() {
 
             <p className="mt-2 text-sm text-[#6b766b]">
               Supports up to 10 receipt photos
+            </p>
+
+            <p className="mt-2 text-xs font-medium text-[#7a8a75]">
+              Currently optimized for English and German receipt images.
+            </p>
+
+            <p className="mt-2 text-xs leading-5 text-[#7d8978]">
+              For best results, make sure the receipt is clearly visible,
+              including prices and purchase date.
             </p>
           </label>
 
@@ -248,14 +306,19 @@ export default function UploadPage() {
 
               <div className="mt-8 space-y-5">
                 {steps.map((step, stepIndex) => {
-                  const visibleStepItems = step.items.filter(() => {
-                    const show = currentIndex < visibleItems;
-                    currentIndex += 1;
-                    return show;
-                  });
+                  const startIndex = currentIndex;
+                  const endIndex = currentIndex + step.items.length;
+
+                  const visibleCountForStep = Math.max(
+                    0,
+                    Math.min(visibleItems - startIndex, step.items.length)
+                  );
+
+                  const visibleStepItems = step.items.slice(0, visibleCountForStep);
+
+                  currentIndex = endIndex;
 
                   if (visibleStepItems.length === 0) return null;
-
                   return (
                     <div
                       key={step.title}
@@ -268,8 +331,7 @@ export default function UploadPage() {
                       <ul className="mt-4 space-y-3 text-[#536657]">
                         {visibleStepItems.map((item, itemIndex) => {
                           const isFailedScan =
-                            shouldFail && stepIndex === 0 && itemIndex === 0;
-
+                            (shouldFail || ocrFailed) && stepIndex === 0 && itemIndex === 0;
                           return (
                             <li key={item} className="flex gap-3">
                               <span>{isFailedScan ? "❌" : "✅"}</span>
