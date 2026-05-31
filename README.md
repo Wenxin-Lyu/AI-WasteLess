@@ -6,19 +6,23 @@ AI🌿WasteLess is an AI-powered zero-waste meal planning app that transforms gr
 
 ---
 
-## Try the Demo
+## Try the MVP
 
-Scan the QR code or open the live demo in your browser:
+Open the website by clicking the link or scanning the QR code:
 
 ```text
 https://ai-waste-less.vercel.app/
 ```
 
 <p align="center">
-  <img src="assets/demo-qr.png" alt="AI WasteLess Demo QR Code" width="220" />
+  <img
+    src="public/ai-wasteless-qr.png"
+    alt="AI WasteLess MVP QR Code"
+    width="220"
+  />
 </p>
 
-You can also add AI🌿WasteLess to your phone home screen as a mobile web app using "Add to Home Screen" for a more app-like experience. 
+For a more app-like mobile experience, AI🌿WasteLess also supports <strong>"Add to Home Screen"</strong>. 
 
 --- 
 
