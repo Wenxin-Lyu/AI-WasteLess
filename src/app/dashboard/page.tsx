@@ -86,7 +86,7 @@ export default function DashboardPage() {
 
       <div className="fixed inset-0 bg-white/20" />
 
-      <section className="relative z-10 mx-auto max-w-7xl px-5 py-24 sm:px-8">
+      <section className="relative z-10 mx-auto max-w-4xl px-5 py-24 sm:px-8">
         <div className="mb-10 text-center">
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#68a850]">
             AI 🌿 WasteLess
@@ -191,7 +191,7 @@ export default function DashboardPage() {
               </p>
 
               <button className="mt-4 rounded-2xl bg-[#f2d96b] px-5 py-3 font-bold text-[#335022] transition hover:-translate-y-1">
-                See Refill Options →
+                See Refill Options 
               </button>
             </div>
           </section>
@@ -284,7 +284,7 @@ export default function DashboardPage() {
               </p>
 
               <button className="mt-4 rounded-2xl bg-[#f2d96b] px-5 py-3 font-bold text-[#335022] transition hover:-translate-y-1">
-                Explore Kitchen Tools →
+                Explore Kitchen Tools
               </button>
             </div>
           </section>
@@ -339,12 +339,8 @@ export default function DashboardPage() {
               <li>✅ Longer-lasting alternatives</li>
             </ul>
 
-            <p className="mt-4 font-bold text-[#185f37]">
-              Estimated: 28% less food waste
-            </p>
-
             <button className="mt-4 rounded-2xl bg-[#f2d96b] px-5 py-3 font-bold text-[#335022] transition hover:-translate-y-1">
-              Explore Smart Bundles →
+              Explore Smart Bundles
             </button>
           </div>
         </section>

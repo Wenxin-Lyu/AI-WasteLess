@@ -38,6 +38,7 @@ export default function UploadPage() {
   const [shouldFail, setShouldFail] = useState(false);
 
   const uploadRef = useRef<HTMLLabelElement | null>(null);
+  const selectedFilesRef = useRef<HTMLDivElement | null>(null);
   const processingRef = useRef<HTMLDivElement | null>(null);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
@@ -111,11 +112,7 @@ export default function UploadPage() {
         return;
       }
 
-      localStorage.setItem(
-        "aiWasteLessResult",
-        JSON.stringify(data)
-      );
-
+      localStorage.setItem("aiWasteLessResult", JSON.stringify(data));
     } catch (error) {
       console.error("OCR ERROR:", error);
       setVisibleItems(1);
@@ -144,6 +141,19 @@ export default function UploadPage() {
   }
 
   useEffect(() => {
+    if (selectedFiles.length === 0 || isProcessing) return;
+
+    const timer = setTimeout(() => {
+      selectedFilesRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 120);
+
+    return () => clearTimeout(timer);
+  }, [selectedFiles.length, isProcessing]);
+
+  useEffect(() => {
     if (!isProcessing) return;
 
     if (ocrFailed) return;
@@ -168,7 +178,7 @@ export default function UploadPage() {
     }, 700);
 
     return () => clearTimeout(timer);
-  }, [isProcessing, visibleItems, shouldFail, totalItems]);
+  }, [isProcessing, visibleItems, shouldFail, totalItems, ocrFailed]);
 
   useEffect(() => {
     if (!isProcessing) return;
@@ -230,7 +240,7 @@ export default function UploadPage() {
             <input
               type="file"
               multiple
-              accept="image/"
+              accept="image/*"
               className="hidden"
               onChange={handleFileSelect}
             />
@@ -256,7 +266,10 @@ export default function UploadPage() {
           </label>
 
           {selectedFiles.length > 0 && (
-            <div className="mx-auto mt-5 max-w-sm rounded-2xl bg-[#e8f5df] px-4 py-3 text-sm font-semibold text-[#2f6b35]">
+            <div
+              ref={selectedFilesRef}
+              className="mx-auto mt-5 max-w-sm rounded-2xl bg-[#e8f5df] px-4 py-3 text-sm font-semibold text-[#2f6b35]"
+            >
               <p>
                 📎 {selectedFiles.length} receipt photo
                 {selectedFiles.length > 1 ? "s" : ""} selected
@@ -288,10 +301,9 @@ export default function UploadPage() {
               onClick={startAnalysis}
               className="mt-8 rounded-2xl bg-[#69af4f] px-10 py-4 text-xl font-bold text-white shadow-xl shadow-green-200/80 transition hover:-translate-y-1 hover:bg-[#548f3f]"
             >
-              Start AI Analysis →
+              Start AI Analysis
             </button>
           )}
-
 
           {isProcessing && (
             <div
@@ -314,11 +326,15 @@ export default function UploadPage() {
                     Math.min(visibleItems - startIndex, step.items.length)
                   );
 
-                  const visibleStepItems = step.items.slice(0, visibleCountForStep);
+                  const visibleStepItems = step.items.slice(
+                    0,
+                    visibleCountForStep
+                  );
 
                   currentIndex = endIndex;
 
                   if (visibleStepItems.length === 0) return null;
+
                   return (
                     <div
                       key={step.title}
@@ -331,7 +347,10 @@ export default function UploadPage() {
                       <ul className="mt-4 space-y-3 text-[#536657]">
                         {visibleStepItems.map((item, itemIndex) => {
                           const isFailedScan =
-                            (shouldFail || ocrFailed) && stepIndex === 0 && itemIndex === 0;
+                            (shouldFail || ocrFailed) &&
+                            stepIndex === 0 &&
+                            itemIndex === 0;
+
                           return (
                             <li key={item} className="flex gap-3">
                               <span>{isFailedScan ? "❌" : "✅"}</span>
@@ -388,7 +407,6 @@ export default function UploadPage() {
               <div ref={bottomRef} />
             </div>
           )}
-
         </div>
       </section>
     </main>

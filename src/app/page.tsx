@@ -49,7 +49,7 @@ export default function Home() {
           href="/upload"
           className="mt-8 rounded-2xl bg-[#69af4f] px-14 py-5 text-2xl font-bold text-white shadow-[0_10px_30px_rgba(122,201,99,0.35)] transition duration-300 hover:-translate-y-1 hover:bg-[#5d9b45]"
         >
-          Start Now →
+          Start Now
         </Link>
 
         {/* Benefits */}
