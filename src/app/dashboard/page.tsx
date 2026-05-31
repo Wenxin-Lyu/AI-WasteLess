@@ -86,7 +86,7 @@ export default function DashboardPage() {
 
       <div className="fixed inset-0 bg-white/20" />
 
-      <section className="relative z-10 mx-auto max-w-4xl px-5 py-24 sm:px-8">
+      <section className="relative z-10 mx-auto max-w-5xl px-5 py-24 sm:px-8">
         <div className="mb-10 text-center">
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#68a850]">
             AI 🌿 WasteLess

@@ -399,7 +399,7 @@ export default function UploadPage() {
                     href="/dashboard"
                     className="mt-8 inline-flex rounded-2xl bg-[#69af4f] px-10 py-4 text-xl font-bold text-white shadow-xl shadow-green-200/80 transition hover:-translate-y-1 hover:bg-[#548f3f]"
                   >
-                    View Dashboard →
+                    View Dashboard 
                   </Link>
                 </div>
               )}
