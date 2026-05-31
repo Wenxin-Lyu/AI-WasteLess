@@ -230,7 +230,7 @@ export default function UploadPage() {
             <input
               type="file"
               multiple
-              accept="image/png,image/jpeg,image/jpg"
+              accept="image/"
               className="hidden"
               onChange={handleFileSelect}
             />
