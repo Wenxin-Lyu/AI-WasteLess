@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="relative h-screen w-screen overflow-hidden bg-[#f8fbf4]">
+    <main className="relative min-h-[calc(100vh-76px)] overflow-hidden bg-[#f8fbf4]">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -15,9 +15,9 @@ export default function Home() {
       <div className="absolute inset-0 bg-white/15" />
 
       {/* Content */}
-      <section className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-        {/* Logo */}
-        <div className="-mt-10 flex flex-wrap items-center justify-center text-5xl font-extrabold tracking-tight text-[#0b4a29] drop-shadow-sm sm:text-7xl md:text-8xl">
+      <section className="relative z-10 flex min-h-[calc(100vh-76px)] flex-col items-center justify-center px-6 py-16 text-center">
+        {/* Hero Title */}
+        <div className="flex flex-wrap items-center justify-center text-5xl font-extrabold tracking-tight text-[#0b4a29] drop-shadow-sm sm:text-7xl md:text-8xl">
           <span>AI</span>
 
           <span className="mx-3 -translate-y-1 text-5xl sm:text-6xl md:text-7xl">
@@ -47,11 +47,11 @@ export default function Home() {
 
         {/* Benefits */}
         <div className="mt-8 flex flex-col items-center gap-3 text-base font-medium text-[#215732] sm:flex-row sm:gap-8 sm:text-lg">
-        <div>🌱 Reduce food waste</div>
+          <div>🌱 Reduce food waste</div>
 
-        <div>🍽️ Plan meals smarter</div>
+          <div>🍽️ Plan meals smarter</div>
 
-        <div>💰 Save money sustainably</div>
+          <div>💰 Save money sustainably</div>
         </div>
       </section>
     </main>

@@ -86,9 +86,9 @@ export default function DashboardPage() {
 
       <div className="fixed inset-0 bg-white/20" />
 
-      <section className="relative z-10 mx-auto max-w-7xl px-5 py-8 sm:px-8">
-        <div className="mb-8 text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#68a850]">
+      <section className="relative z-10 mx-auto max-w-7xl px-5 py-24 sm:px-8">
+        <div className="mb-10 text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.3em] text-[#68a850]">
             AI 🌿 WasteLess
           </p>
 
@@ -101,8 +101,8 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          <section className="rounded-[2rem] border border-[#d8e8c8] bg-white/86 p-6 shadow-2xl shadow-green-100/80 backdrop-blur-md sm:p-8">
+        <div className="grid gap-7 lg:grid-cols-2">
+          <section className="rounded-[2rem] border border-[#d8e8c8] bg-white/86 p-6 shadow-[0_20px_60px_rgba(90,140,90,0.18)] backdrop-blur-xl sm:p-8">
             <div className="mb-5 flex items-center gap-3">
               <div className="text-4xl">⚠️</div>
 
@@ -196,7 +196,7 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          <section className="rounded-[2rem] border border-[#d8e8c8] bg-white/86 p-6 shadow-2xl shadow-green-100/80 backdrop-blur-md sm:p-8">
+          <section className="rounded-[2rem] border border-[#d8e8c8] bg-white/86 p-6 sshadow-[0_20px_60px_rgba(90,140,90,0.18)] backdrop-blur-xl sm:p-8">
             <div className="mb-5 flex items-center gap-3">
               <div className="text-4xl">🤖</div>
 
@@ -290,7 +290,7 @@ export default function DashboardPage() {
           </section>
         </div>
 
-        <section className="mt-6 rounded-[2rem] border border-[#d8e8c8] bg-white/86 p-6 shadow-2xl shadow-green-100/80 backdrop-blur-md sm:p-8">
+        <section className="mt-6 rounded-[2rem] border border-[#d8e8c8] bg-white/86 p-6 shadow-[0_20px_60px_rgba(90,140,90,0.18)] backdrop-blur-xl sm:p-8">
           <div className="mb-5 flex items-center gap-3">
             <div className="text-4xl">🍽️</div>
 
@@ -349,14 +349,6 @@ export default function DashboardPage() {
           </div>
         </section>
 
-        <div className="mt-8 text-center">
-          <Link
-            href="/upload"
-            className="text-sm font-bold text-[#3f6f3a] hover:underline"
-          >
-            ← Back to upload
-          </Link>
-        </div>
       </section>
     </main>
   );

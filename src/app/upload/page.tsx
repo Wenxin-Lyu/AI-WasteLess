@@ -210,15 +210,15 @@ export default function UploadPage() {
 
       <div className="fixed inset-0 bg-white/10" />
 
-      <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-10">
-        <div className="w-full max-w-xl rounded-[2rem] border border-[#d8e8c8] bg-white/84 p-8 text-center shadow-2xl shadow-green-100/80 backdrop-blur-md sm:p-10">
-          <div className="mb-4 text-5xl">🧾</div>
+      <section className="relative z-10 flex min-h-[calc(100vh-76px)] flex-col items-center justify-center px-6 py-24">
+        <div className="w-full max-w-xl rounded-[2rem] border border-[#d8e8c8] bg-white/88 p-8 text-center shadow-[0_20px_60px_rgba(90,140,90,0.18)] backdrop-blur-xl sm:p-10">
+          <div className="mb-4 text-6xl">🧾</div>
 
-          <h1 className="text-4xl font-extrabold leading-tight text-[#0b4a29] sm:text-5xl">
+          <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-[#0b4a29] sm:text-5xl">
             Upload Your Grocery Receipt
           </h1>
 
-          <p className="mt-5 text-lg leading-8 text-[#55665a]">
+          <p className="mt-5 text-lg leading-8 text-[#5f6f63]">
             AI will read your receipt, detect ingredients, and generate a
             zero-waste meal plan.
           </p>
@@ -389,12 +389,6 @@ export default function UploadPage() {
             </div>
           )}
 
-          <Link
-            href="/"
-            className="mt-6 block text-center text-sm font-medium text-[#3f6f3a] hover:underline"
-          >
-            Back to home
-          </Link>
         </div>
       </section>
     </main>
