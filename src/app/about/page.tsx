@@ -13,25 +13,29 @@ export default function AboutPage() {
       <section className="relative z-10 mx-auto max-w-5xl px-6 py-24">
         <div className="rounded-[2rem] border border-[#d8e8c8] bg-white/90 p-8 shadow-[0_20px_60px_rgba(90,140,90,0.18)] backdrop-blur-xl sm:p-10">
           <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#68a850]">
-            About Me 
+            About Me
           </p>
 
-          <div className="mt-6 flex justify-center">
-            <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[#eef8e7] shadow-inner">
+          <div className="mt-8 flex flex-col items-center gap-6 sm:flex-row sm:items-center">
+            {/* Logo */}
+            <div className="flex h-28 w-28 flex-shrink-0 items-center justify-center rounded-full bg-[#eef8e7] shadow-inner">
               <img
                 src="/logo.png"
                 alt="AI WasteLess Logo"
                 className="h-20 w-20 object-contain"
               />
             </div>
+
+            {/* Title */}
+            <div className="text-center sm:text-left">
+              <h1 className="text-4xl font-extrabold tracking-tight text-[#0b4a29] sm:text-5xl">
+                Turning grocery receipts into low-waste decisions
+              </h1>
+            </div>
           </div>
 
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-[#0b4a29] sm:text-5xl">
-            Turning grocery receipts into low-waste decisions
-          </h1>
-
           <p className="mt-6 text-justify leading-8 text-[#536657]">
-            AI 🌿 WasteLess is an AI-powered zero-waste meal planning product
+            AI🌿WasteLess is an AI-powered zero-waste meal planning product
             that transforms grocery receipts into low-waste meal
             recommendations, grocery insights, and sustainability-focused
             household decisions. The product is designed for students, young professionals, and small
