@@ -5,6 +5,23 @@
 AI🌿WasteLess is an AI-powered zero-waste meal planning app that transforms grocery receipts into low-waste meal recommendations and grocery insights.
 
 ---
+
+## Try the Demo
+
+Scan the QR code or open the live demo in your browser:
+
+```text
+https://ai-waste-less.vercel.app/
+```
+
+<p align="center">
+  <img src="assets/demo-qr.png" alt="AI WasteLess Demo QR Code" width="220" />
+</p>
+
+You can also add AI🌿WasteLess to your phone home screen as a mobile web app using "Add to Home Screen" for a more app-like experience. 
+
+--- 
+
 ## Problem
 
 Students, young professionals, and small households often overbuy groceries, forget ingredients they already purchased, and struggle to plan meals around perishable food before expiration.
