@@ -13,47 +13,39 @@ export default function AboutPage() {
       <section className="relative z-10 mx-auto max-w-5xl px-6 py-24">
         <div className="rounded-[2rem] border border-[#d8e8c8] bg-white/90 p-8 shadow-[0_20px_60px_rgba(90,140,90,0.18)] backdrop-blur-xl sm:p-10">
           <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#68a850]">
-            About AI WasteLess
+            About Me 
           </p>
+
+          <div className="mt-6 flex justify-center">
+            <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[#eef8e7] shadow-inner">
+              <img
+                src="/logo.png"
+                alt="AI WasteLess Logo"
+                className="h-20 w-20 object-contain"
+              />
+            </div>
+          </div>
 
           <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-[#0b4a29] sm:text-5xl">
             Turning grocery receipts into low-waste decisions
           </h1>
 
-          <p className="mt-6 leading-8 text-[#536657]">
+          <p className="mt-6 text-justify leading-8 text-[#536657]">
             AI 🌿 WasteLess is an AI-powered zero-waste meal planning product
             that transforms grocery receipts into low-waste meal
             recommendations, grocery insights, and sustainability-focused
-            household decisions.
-          </p>
-
-          <p className="mt-4 leading-8 text-[#536657]">
-            The product is designed for students, young professionals, and small
+            household decisions. The product is designed for students, young professionals, and small
             households who want to reduce food waste, avoid unnecessary grocery
-            spending, and plan meals around ingredients they already have.
+            spending, and plan meals around ingredients they already have. 
           </p>
 
-          <div className="mt-8 space-y-7">
+          <div className="mt-8 space-y-7">         
             <section>
               <h2 className="text-2xl font-extrabold text-[#0b4a29]">
-                Product Vision
+                AI Workflow
               </h2>
 
-              <p className="mt-3 leading-8 text-[#536657]">
-                AI WasteLess starts with receipt understanding and expands
-                toward a smarter sustainable kitchen assistant. The long-term
-                vision is to support inventory awareness, food waste prediction,
-                personalized shopping assistance, and low-waste household
-                planning.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-extrabold text-[#0b4a29]">
-                How it works
-              </h2>
-
-              <p className="mt-3 leading-8 text-[#536657]">
+              <p className="mt-3 text-justify leading-8 text-[#536657]">
                 The current workflow combines OCR, receipt validation,
                 rule-based food category reasoning, expiration estimation, and
                 meal planning logic. Each uploaded receipt is processed through a
@@ -64,32 +56,30 @@ export default function AboutPage() {
 
             <section>
               <h2 className="text-2xl font-extrabold text-[#0b4a29]">
-                Business Direction
+                Product Vision
               </h2>
 
-              <p className="mt-3 leading-8 text-[#536657]">
-                Future commercialization opportunities may include smart refill
-                recommendations, low-waste grocery bundles, kitchen tool
-                recommendations, sustainability-focused shopping support, and
-                grocery ecosystem integration.
+              <p className="mt-3 text-justify leading-8 text-[#536657]">
+                AI WasteLess starts with receipt understanding and expands toward a
+                smarter sustainable kitchen assistant. Future development directions
+                include inventory awareness, food waste prediction, personalized
+                shopping assistance, smart refill recommendations, low-waste grocery
+                support, and broader grocery ecosystem integration for more sustainable
+                household consumption.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-extrabold text-[#0b4a29]">
-                Legal notice
+                Product Disclaimer
               </h2>
 
-              <p className="mt-3 leading-8 text-[#536657]">
+              <p className="mt-3 text-justify leading-8 text-[#536657]">
                 This project is an academic and competition MVP. The expiration
                 dates, waste-risk estimates, meal suggestions, and shopping
                 recommendations are generated for demonstration purposes only and
                 should not be treated as professional food safety, medical, or
-                nutritional advice.
-              </p>
-
-              <p className="mt-3 leading-8 text-[#536657]">
-                Users should always check product labels, storage conditions,
+                nutritional advice. Users should always check product labels, storage conditions,
                 smell, appearance, and official food safety guidance before
                 consuming any ingredient.
               </p>
