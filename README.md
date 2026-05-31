@@ -26,7 +26,7 @@ For a more app-like mobile experience, AI🌿WasteLess also supports <strong>"Ad
 
 --- 
 
-## Problem
+## Why AI🌿WasteLess?
 
 Students, young professionals, and small households often overbuy groceries, forget ingredients they already purchased, and struggle to plan meals around perishable food before expiration.
 
