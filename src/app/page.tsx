@@ -17,15 +17,9 @@ export default function Home() {
       {/* Content */}
       <section className="relative z-10 flex min-h-[calc(100vh-120px)] flex-col items-center justify-center px-6 py-20 text-center">
         {/* Hero Title */}
-        <div className="flex flex-wrap items-center justify-center text-5xl font-extrabold tracking-[-0.04em] text-[#0b4a29] drop-shadow-sm sm:text-7xl md:text-[7rem]">
-          <span>AI</span>
-
-          <span className="mx-3 -translate-y-1 text-5xl sm:text-6xl md:text-7xl">
-            🌿
-          </span>
-
-          <span>WasteLess</span>
-        </div>
+        <h1 className="whitespace-nowrap text-5xl font-extrabold tracking-[-0.04em] text-[#0b4a29] drop-shadow-sm sm:text-7xl md:text-[7rem]">
+          AI🌿WasteLess
+        </h1>
 
         {/* Slogan */}
         <div className="mt-8 space-y-1">

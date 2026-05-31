@@ -13,7 +13,7 @@ export default function AboutPage() {
       <section className="relative z-10 mx-auto max-w-4xl px-6 py-24">
         <div className="rounded-[2rem] border border-[#d8e8c8] bg-white/90 p-8 shadow-[0_20px_60px_rgba(90,140,90,0.18)] backdrop-blur-xl sm:p-10">
           <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#68a850]">
-            About AI WasteLess
+            About Me 
           </p>
 
           <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-[#0b4a29] sm:text-5xl">
@@ -21,7 +21,7 @@ export default function AboutPage() {
           </h1>
 
           <p className="mt-6 leading-8 text-[#536657]">
-            AI WasteLess is a student-built MVP that turns grocery receipts into
+            AI 🌿 WasteLess is a student-built MVP that turns grocery receipts into
             low-waste meal recommendations and grocery insights. The product is
             designed for students, young professionals, and small households who
             want to reduce food waste, save money, and plan meals more
