@@ -36,6 +36,8 @@ export default function UploadPage() {
   const [visibleItems, setVisibleItems] = useState(0);
   const [ocrFailed, setOcrFailed] = useState(false);
   const [shouldFail, setShouldFail] = useState(false);
+  const [failedFileName, setFailedFileName] = useState<string | null>(null);
+  const [validatedFileNames, setValidatedFileNames] = useState<string[]>([]);
 
   const uploadRef = useRef<HTMLLabelElement | null>(null);
   const selectedFilesRef = useRef<HTMLDivElement | null>(null);
@@ -44,6 +46,14 @@ export default function UploadPage() {
 
   const totalItems = steps.reduce((sum, step) => sum + step.items.length, 0);
 
+  function resetAnalysisState() {
+    setIsProcessing(false);
+    setVisibleItems(0);
+    setOcrFailed(false);
+    setFailedFileName(null);
+    setValidatedFileNames([]);
+  }
+
   function handleFileSelect(event: React.ChangeEvent<HTMLInputElement>) {
     const files = event.target.files;
     if (!files || files.length === 0) return;
@@ -51,7 +61,7 @@ export default function UploadPage() {
     const newFiles = Array.from(files);
 
     setSelectedFiles((prev) => {
-      const combined = [...prev, ...newFiles].slice(0, 10);
+      const combined = [...prev, ...newFiles].slice(0, 5);
 
       const fail = combined.some((file) =>
         file.name.toLowerCase().match(/random|test|fail|meme/)
@@ -61,9 +71,7 @@ export default function UploadPage() {
       return combined;
     });
 
-    setIsProcessing(false);
-    setVisibleItems(0);
-    setOcrFailed(false);
+    resetAnalysisState();
 
     event.target.value = "";
   }
@@ -80,9 +88,7 @@ export default function UploadPage() {
       return updated;
     });
 
-    setIsProcessing(false);
-    setVisibleItems(0);
-    setOcrFailed(false);
+    resetAnalysisState();
   }
 
   async function startAnalysis() {
@@ -91,11 +97,15 @@ export default function UploadPage() {
     setIsProcessing(true);
     setVisibleItems(0);
     setOcrFailed(false);
+    setFailedFileName(null);
+    setValidatedFileNames([]);
 
     try {
       const formData = new FormData();
 
-      formData.append("image", selectedFiles[0]);
+      selectedFiles.forEach((file) => {
+        formData.append("images", file);
+      });
 
       const response = await fetch("/api/ocr", {
         method: "POST",
@@ -107,14 +117,39 @@ export default function UploadPage() {
       console.log("OCR RESULT:", data);
 
       if (!response.ok || !data.success) {
+        console.log("FAILED FILE:", data.failedFileName);
+
+        setFailedFileName(data.failedFileName || null);
+
+        if (data.receiptResults && Array.isArray(data.receiptResults)) {
+          setValidatedFileNames(
+            data.receiptResults.map(
+              (result: { fileName: string }) => result.fileName
+            )
+          );
+        }
+
         setVisibleItems(1);
         setOcrFailed(true);
+
         return;
+      }
+
+      if (data.receiptResults && Array.isArray(data.receiptResults)) {
+        setValidatedFileNames(
+          data.receiptResults.map(
+            (result: { fileName: string }) => result.fileName
+          )
+        );
+      } else {
+        setValidatedFileNames(selectedFiles.map((file) => file.name));
       }
 
       localStorage.setItem("aiWasteLessResult", JSON.stringify(data));
     } catch (error) {
       console.error("OCR ERROR:", error);
+
+      setFailedFileName(null);
       setVisibleItems(1);
       setOcrFailed(true);
     }
@@ -128,9 +163,7 @@ export default function UploadPage() {
   }
 
   function handleUploadAgain() {
-    setIsProcessing(false);
-    setVisibleItems(0);
-    setOcrFailed(false);
+    resetAnalysisState();
 
     setTimeout(() => {
       uploadRef.current?.scrollIntoView({
@@ -138,6 +171,14 @@ export default function UploadPage() {
         block: "center",
       });
     }, 200);
+  }
+
+  function getFileStatus(fileName: string) {
+    if (failedFileName === fileName) return "failed";
+
+    if (validatedFileNames.includes(fileName)) return "success";
+
+    return "idle";
   }
 
   useEffect(() => {
@@ -252,7 +293,7 @@ export default function UploadPage() {
             </p>
 
             <p className="mt-2 text-sm text-[#6b766b]">
-              Supports up to 10 receipt photos
+              Supports up to 5 receipt photos
             </p>
 
             <p className="mt-2 text-xs font-medium text-[#7a8a75]">
@@ -276,22 +317,40 @@ export default function UploadPage() {
               </p>
 
               <div className="mt-3 space-y-2 text-left">
-                {selectedFiles.map((file, index) => (
-                  <div
-                    key={`${file.name}-${index}`}
-                    className="flex items-center justify-between gap-3 rounded-xl bg-white/70 px-3 py-2"
-                  >
-                    <span className="truncate">{file.name}</span>
+                {selectedFiles.map((file, index) => {
+                  const status = getFileStatus(file.name);
 
-                    <button
-                      type="button"
-                      onClick={() => removeFile(index)}
-                      className="font-bold text-[#9a3412]"
+                  return (
+                    <div
+                      key={`${file.name}-${index}`}
+                      className="flex items-center justify-between gap-3 rounded-xl bg-white/70 px-3 py-2"
                     >
-                      ✕
-                    </button>
-                  </div>
-                ))}
+                      <div className="flex min-w-0 items-center gap-2">
+                        <span className="truncate">{file.name}</span>
+
+                        {status === "success" && (
+                          <span className="flex-shrink-0 text-base font-bold text-green-600">
+                            ✅
+                          </span>
+                        )}
+
+                        {status === "failed" && (
+                          <span className="flex-shrink-0 text-base font-bold text-red-500">
+                            ❌
+                          </span>
+                        )}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => removeFile(index)}
+                        className="font-bold text-[#9a3412]"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -399,7 +458,7 @@ export default function UploadPage() {
                     href="/dashboard"
                     className="mt-8 inline-flex rounded-2xl bg-[#69af4f] px-10 py-4 text-xl font-bold text-white shadow-xl shadow-green-200/80 transition hover:-translate-y-1 hover:bg-[#548f3f]"
                   >
-                    View Dashboard 
+                    View Dashboard
                   </Link>
                 </div>
               )}
