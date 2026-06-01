@@ -37,6 +37,7 @@ type ReceiptResult = {
 export default function UploadPage() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [analysisReady, setAnalysisReady] = useState(false);
   const [visibleItems, setVisibleItems] = useState(0);
   const [ocrFailed, setOcrFailed] = useState(false);
   const [failedFileNames, setFailedFileNames] = useState<string[]>([]);
@@ -51,6 +52,7 @@ export default function UploadPage() {
 
   function resetAnalysisState() {
     setIsProcessing(false);
+    setAnalysisReady(false);
     setVisibleItems(0);
     setOcrFailed(false);
     setFailedFileNames([]);
@@ -82,10 +84,18 @@ export default function UploadPage() {
     if (selectedFiles.length === 0) return;
 
     setIsProcessing(true);
+    setAnalysisReady(false);
     setVisibleItems(0);
     setOcrFailed(false);
     setFailedFileNames([]);
     setValidatedFileNames([]);
+
+    setTimeout(() => {
+      processingRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 200);
 
     try {
       const formData = new FormData();
@@ -125,11 +135,13 @@ export default function UploadPage() {
         setFailedFileNames(failedFiles);
         setVisibleItems(1);
         setOcrFailed(true);
+        setAnalysisReady(false);
 
         return;
       }
 
       setFailedFileNames([]);
+      setAnalysisReady(true);
       localStorage.setItem("aiWasteLessResult", JSON.stringify(data));
     } catch (error) {
       console.error("OCR ERROR:", error);
@@ -137,14 +149,8 @@ export default function UploadPage() {
       setFailedFileNames([]);
       setVisibleItems(1);
       setOcrFailed(true);
+      setAnalysisReady(false);
     }
-
-    setTimeout(() => {
-      processingRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 200);
   }
 
   function handleUploadAgain() {
@@ -180,7 +186,7 @@ export default function UploadPage() {
   }, [selectedFiles.length, isProcessing]);
 
   useEffect(() => {
-    if (!isProcessing) return;
+    if (!isProcessing || !analysisReady) return;
 
     if (ocrFailed) return;
 
@@ -191,7 +197,7 @@ export default function UploadPage() {
     }, 700);
 
     return () => clearTimeout(timer);
-  }, [isProcessing, visibleItems, totalItems, ocrFailed]);
+  }, [isProcessing, analysisReady, visibleItems, totalItems, ocrFailed]);
 
   useEffect(() => {
     if (!isProcessing) return;
@@ -207,7 +213,7 @@ export default function UploadPage() {
             top: document.documentElement.scrollHeight,
             behavior: "smooth",
           });
-        } else {
+        } else if (visibleItems > 0) {
           bottomRef.current?.scrollIntoView({
             behavior: "smooth",
             block: "end",
