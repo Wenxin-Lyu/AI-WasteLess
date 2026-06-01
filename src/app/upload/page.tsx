@@ -30,13 +30,16 @@ const steps = [
   },
 ];
 
+type ReceiptResult = {
+  fileName: string;
+};
+
 export default function UploadPage() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [visibleItems, setVisibleItems] = useState(0);
   const [ocrFailed, setOcrFailed] = useState(false);
-  const [shouldFail, setShouldFail] = useState(false);
-  const [failedFileName, setFailedFileName] = useState<string | null>(null);
+  const [failedFileNames, setFailedFileNames] = useState<string[]>([]);
   const [validatedFileNames, setValidatedFileNames] = useState<string[]>([]);
 
   const uploadRef = useRef<HTMLLabelElement | null>(null);
@@ -50,7 +53,7 @@ export default function UploadPage() {
     setIsProcessing(false);
     setVisibleItems(0);
     setOcrFailed(false);
-    setFailedFileName(null);
+    setFailedFileNames([]);
     setValidatedFileNames([]);
   }
 
@@ -61,14 +64,7 @@ export default function UploadPage() {
     const newFiles = Array.from(files);
 
     setSelectedFiles((prev) => {
-      const combined = [...prev, ...newFiles].slice(0, 5);
-
-      const fail = combined.some((file) =>
-        file.name.toLowerCase().match(/random|test|fail|meme/)
-      );
-
-      setShouldFail(fail);
-      return combined;
+      return [...prev, ...newFiles].slice(0, 5);
     });
 
     resetAnalysisState();
@@ -77,16 +73,7 @@ export default function UploadPage() {
   }
 
   function removeFile(index: number) {
-    setSelectedFiles((prev) => {
-      const updated = prev.filter((_, i) => i !== index);
-
-      const fail = updated.some((file) =>
-        file.name.toLowerCase().match(/random|test|fail|meme/)
-      );
-
-      setShouldFail(fail);
-      return updated;
-    });
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
 
     resetAnalysisState();
   }
@@ -97,7 +84,7 @@ export default function UploadPage() {
     setIsProcessing(true);
     setVisibleItems(0);
     setOcrFailed(false);
-    setFailedFileName(null);
+    setFailedFileNames([]);
     setValidatedFileNames([]);
 
     try {
@@ -116,40 +103,38 @@ export default function UploadPage() {
 
       console.log("OCR RESULT:", data);
 
-      if (!response.ok || !data.success) {
-        console.log("FAILED FILE:", data.failedFileName);
-
-        setFailedFileName(data.failedFileName || null);
-
-        if (data.receiptResults && Array.isArray(data.receiptResults)) {
-          setValidatedFileNames(
-            data.receiptResults.map(
-              (result: { fileName: string }) => result.fileName
+      const successfulFiles =
+        data.receiptResults && Array.isArray(data.receiptResults)
+          ? data.receiptResults.map(
+              (result: ReceiptResult) => result.fileName
             )
-          );
-        }
+          : [];
 
+      setValidatedFileNames(successfulFiles);
+
+      if (!response.ok || !data.success) {
+        const failedFiles =
+          data.failedFileNames && Array.isArray(data.failedFileNames)
+            ? data.failedFileNames
+            : data.failedFileName
+            ? [data.failedFileName]
+            : [];
+
+        console.log("FAILED FILES:", failedFiles);
+
+        setFailedFileNames(failedFiles);
         setVisibleItems(1);
         setOcrFailed(true);
 
         return;
       }
 
-      if (data.receiptResults && Array.isArray(data.receiptResults)) {
-        setValidatedFileNames(
-          data.receiptResults.map(
-            (result: { fileName: string }) => result.fileName
-          )
-        );
-      } else {
-        setValidatedFileNames(selectedFiles.map((file) => file.name));
-      }
-
+      setFailedFileNames([]);
       localStorage.setItem("aiWasteLessResult", JSON.stringify(data));
     } catch (error) {
       console.error("OCR ERROR:", error);
 
-      setFailedFileName(null);
+      setFailedFileNames([]);
       setVisibleItems(1);
       setOcrFailed(true);
     }
@@ -174,7 +159,7 @@ export default function UploadPage() {
   }
 
   function getFileStatus(fileName: string) {
-    if (failedFileName === fileName) return "failed";
+    if (failedFileNames.includes(fileName)) return "failed";
 
     if (validatedFileNames.includes(fileName)) return "success";
 
@@ -199,19 +184,6 @@ export default function UploadPage() {
 
     if (ocrFailed) return;
 
-    if (shouldFail) {
-      if (visibleItems >= 1) {
-        setOcrFailed(true);
-        return;
-      }
-
-      const timer = setTimeout(() => {
-        setVisibleItems(1);
-      }, 800);
-
-      return () => clearTimeout(timer);
-    }
-
     if (visibleItems >= totalItems) return;
 
     const timer = setTimeout(() => {
@@ -219,7 +191,7 @@ export default function UploadPage() {
     }, 700);
 
     return () => clearTimeout(timer);
-  }, [isProcessing, visibleItems, shouldFail, totalItems, ocrFailed]);
+  }, [isProcessing, visibleItems, totalItems, ocrFailed]);
 
   useEffect(() => {
     if (!isProcessing) return;
@@ -406,9 +378,7 @@ export default function UploadPage() {
                       <ul className="mt-4 space-y-3 text-[#536657]">
                         {visibleStepItems.map((item, itemIndex) => {
                           const isFailedScan =
-                            (shouldFail || ocrFailed) &&
-                            stepIndex === 0 &&
-                            itemIndex === 0;
+                            ocrFailed && stepIndex === 0 && itemIndex === 0;
 
                           return (
                             <li key={item} className="flex gap-3">
@@ -428,7 +398,7 @@ export default function UploadPage() {
               {ocrFailed && visibleItems >= 1 && (
                 <div className="mt-6 rounded-2xl bg-[#fff7ed] p-5">
                   <p className="text-lg font-bold text-[#9a3412]">
-                    We couldn’t read this receipt clearly.
+                    We couldn’t read your receipt(s) clearly.
                   </p>
 
                   <p className="mt-4 text-[#7c5a3c]">Try:</p>
@@ -437,6 +407,7 @@ export default function UploadPage() {
                     <li>✅ Better lighting</li>
                     <li>✅ A clearer photo</li>
                     <li>✅ A flatter receipt</li>
+                    <li>✅ Remove the image marked with ❌</li>
                   </ul>
 
                   <button

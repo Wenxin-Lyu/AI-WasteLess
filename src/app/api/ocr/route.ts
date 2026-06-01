@@ -3,13 +3,27 @@ import { analyzeExpiration } from "./expirationAgent";
 import { generateMealPlan } from "./mealPlanningAgent";
 import { validateReceiptText } from "./receiptValidator";
 
+type ReceiptResult = {
+  fileName: string;
+  text: string;
+  parsedReceipt: ReturnType<typeof parseReceiptText>;
+  receiptValidation: ReturnType<typeof validateReceiptText>;
+  raw: unknown;
+};
+
+type FailedResult = {
+  fileName: string;
+  error: string;
+  text: string;
+  receiptValidation: ReturnType<typeof validateReceiptText>;
+  raw: unknown;
+};
+
 async function runOCR(image: File) {
   const ocrFormData = new FormData();
 
   ocrFormData.append("file", image);
-
   ocrFormData.append("apikey", process.env.OCR_SPACE_API_KEY || "");
-
   ocrFormData.append("language", "eng");
 
   const response = await fetch("https://api.ocr.space/parse/image", {
@@ -18,7 +32,6 @@ async function runOCR(image: File) {
   });
 
   const data = await response.json();
-
   const parsedText = data?.ParsedResults?.[0]?.ParsedText || "";
 
   return {
@@ -33,7 +46,6 @@ export async function POST(request: Request) {
     const formData = await request.formData();
 
     const uploadedImages = formData.getAll("images") as File[];
-
     const fallbackSingleImage = formData.get("image") as File | null;
 
     const images =
@@ -50,11 +62,11 @@ export async function POST(request: Request) {
       );
     }
 
-    const receiptResults = [];
+    const receiptResults: ReceiptResult[] = [];
+    const failedResults: FailedResult[] = [];
 
     for (const image of images) {
       const ocrResult = await runOCR(image);
-
       const receiptValidation = validateReceiptText(ocrResult.parsedText);
 
       console.log("OCR TEXT:", ocrResult.parsedText);
@@ -65,45 +77,29 @@ export async function POST(request: Request) {
         !ocrResult.parsedText ||
         !receiptValidation.isLikelyReceipt
       ) {
-        console.log("RECEIPT VALIDATION FAILED:", {
+        failedResults.push({
           fileName: image.name,
+          error: "This image does not look like a readable grocery receipt.",
+          text: ocrResult.parsedText,
           receiptValidation,
+          raw: ocrResult.data,
         });
 
-        return Response.json(
-          {
-            success: false,
-            error:
-              "One or more uploaded images do not look like readable grocery receipts.",
-            failedFileName: image.name,
-            receiptValidation,
-            text: ocrResult.parsedText,
-            raw: ocrResult.data,
-            receiptResults,
-          },
-          { status: 400 }
-        );
+        continue;
       }
 
       const parsedReceipt = parseReceiptText(ocrResult.parsedText);
 
       if (parsedReceipt.ingredients.length === 0) {
-        console.log("NO INGREDIENTS DETECTED:", image.name);
+        failedResults.push({
+          fileName: image.name,
+          error: "No recognizable grocery ingredients were detected.",
+          text: ocrResult.parsedText,
+          receiptValidation,
+          raw: ocrResult.data,
+        });
 
-        return Response.json(
-          {
-            success: false,
-            error:
-              "One or more uploaded receipts did not contain recognizable grocery ingredients.",
-            failedFileName: image.name,
-            receiptValidation,
-            text: ocrResult.parsedText,
-            parsedReceipt,
-            raw: ocrResult.data,
-            receiptResults,
-          },
-          { status: 400 }
-        );
+        continue;
       }
 
       receiptResults.push({
@@ -113,6 +109,23 @@ export async function POST(request: Request) {
         receiptValidation,
         raw: ocrResult.data,
       });
+    }
+
+    if (failedResults.length > 0) {
+      console.log("FAILED RECEIPTS:", failedResults);
+
+      return Response.json(
+        {
+          success: false,
+          error:
+            "One or more uploaded images do not look like readable grocery receipts.",
+          failedFileName: failedResults[0].fileName,
+          failedFileNames: failedResults.map((result) => result.fileName),
+          failedResults,
+          receiptResults,
+        },
+        { status: 400 }
+      );
     }
 
     const firstPurchaseDate =
@@ -158,6 +171,8 @@ export async function POST(request: Request) {
         checkedImages: receiptResults.length,
       },
       receiptResults,
+      failedResults: [],
+      failedFileNames: [],
     });
   } catch (error) {
     console.error(error);
