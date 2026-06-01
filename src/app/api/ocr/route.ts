@@ -79,6 +79,7 @@ export async function POST(request: Request) {
             receiptValidation,
             text: ocrResult.parsedText,
             raw: ocrResult.data,
+            receiptResults,
           },
           { status: 400 }
         );
@@ -99,6 +100,7 @@ export async function POST(request: Request) {
             text: ocrResult.parsedText,
             parsedReceipt,
             raw: ocrResult.data,
+            receiptResults,
           },
           { status: 400 }
         );
