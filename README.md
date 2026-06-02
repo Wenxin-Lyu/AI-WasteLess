@@ -24,10 +24,7 @@ https://ai-waste-less.vercel.app/
 
 For a more app-like mobile experience, AI🌿WasteLess also supports <strong>"Add to Home Screen"</strong>. 
 
-Sample supermarket receipts used for OCR testing are available in: 
-
-```text
-public/test-receipts/
+Sample supermarket receipts used for OCR testing are available in: public/test-receipts/
 
 --- 
 
