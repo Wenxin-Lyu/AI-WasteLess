@@ -29,14 +29,14 @@ export default function AboutPage() {
             {/* Title */}
             <div className="text-center sm:text-left">
               <h1 className="text-4xl font-extrabold tracking-tight text-[#0b4a29] sm:text-5xl">
-                Turning grocery receipts into low-waste decisions
+                Turning supermarket receipts into low-waste decisions
               </h1>
             </div>
           </div>
 
           <p className="mt-6 text-justify leading-8 text-[#536657]">
             AI🌿WasteLess is an AI-powered zero-waste meal planning product
-            that transforms grocery receipts into low-waste meal
+            that transforms supermarket receipts into low-waste meal
             recommendations, grocery insights, and sustainability-focused
             household decisions. The product is designed for students, young professionals, and small
             households who want to reduce food waste, avoid unnecessary grocery

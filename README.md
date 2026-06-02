@@ -2,7 +2,7 @@
 
 **Keep the receipt. We handle the rest.**
 
-AI🌿WasteLess is an AI-powered zero-waste meal planning app that transforms grocery receipts into low-waste meal recommendations and grocery insights.
+AI🌿WasteLess is an AI-powered zero-waste meal planning app that transforms supermarket receipts into low-waste meal recommendations and grocery insights.  
 
 ---
 
