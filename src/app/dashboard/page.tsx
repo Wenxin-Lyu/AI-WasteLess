@@ -77,6 +77,40 @@ export default function DashboardPage() {
 
   const isCompleted = itemStatus !== "active";
 
+  if (!agentResult) {
+    return (
+      <main className="relative min-h-screen overflow-hidden bg-[#f8fbf4]">
+        <div
+          className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/dashboard-bg.png')" }}
+        />
+
+        <div className="fixed inset-0 bg-white/20" />
+
+        <section className="relative z-10 flex min-h-screen items-center justify-center px-6">
+          <div className="w-full max-w-lg rounded-[2rem] border border-[#d8e8c8] bg-white/90 p-10 text-center shadow-[0_20px_60px_rgba(90,140,90,0.18)] backdrop-blur-xl">
+            <div className="text-6xl">🧾</div>
+
+            <h1 className="mt-5 text-4xl font-extrabold text-[#0b4a29]">
+              No receipt analysis found
+            </h1>
+
+            <p className="mt-4 leading-8 text-[#536657]">
+              Upload a grocery receipt first to generate your AI dashboard.
+            </p>
+
+            <Link
+              href="/upload"
+              className="mt-8 inline-flex rounded-2xl bg-[#69af4f] px-8 py-4 text-lg font-bold text-white shadow-xl shadow-green-200/80 transition hover:-translate-y-1 hover:bg-[#548f3f]"
+            >
+              Upload Receipt
+            </Link>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-[#f8fbf4]">
       <div
