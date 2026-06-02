@@ -83,6 +83,8 @@ export default function UploadPage() {
   async function startAnalysis() {
     if (selectedFiles.length === 0) return;
 
+    localStorage.removeItem("aiWasteLessResult");
+    
     setIsProcessing(true);
     setAnalysisReady(false);
     setVisibleItems(0);
