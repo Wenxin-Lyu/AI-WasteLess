@@ -150,8 +150,10 @@ export default function DashboardPage() {
                 <div className="space-y-3">
                   {todayPriority ? (
                     <div className="rounded-2xl bg-[#fff8df] p-4 font-semibold text-[#7a5a00]">
-                      ⚠️ {todayPriority.name} expires in{" "}
-                      {Math.abs(todayPriority.daysRemaining ?? 0)} day(s)
+                      ⚠️ {todayPriority.name}{" "}
+                      {todayPriority.daysRemaining !== null
+                        ? `expires in ${Math.max(1, todayPriority.daysRemaining)} day(s)`
+                        : "should be used soon"}
                     </div>
                   ) : (
                     <div className="rounded-2xl bg-[#fff8df] p-4 font-semibold text-[#7a5a00]">
