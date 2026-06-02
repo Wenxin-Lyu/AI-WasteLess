@@ -77,6 +77,11 @@ const expirationDatabase: Record<string, ExpirationInfo> = {
     wasteRisk: "Low",
   },
 
+  breakfast: {
+    shelfLifeDays: 90,
+    wasteRisk: "Low",
+  },
+  
   frozen_food: {
     shelfLifeDays: 90,
     wasteRisk: "Low",
@@ -164,9 +169,9 @@ export function analyzeExpiration(
       : null;
 
     const daysRemaining =
-      calculatedDaysRemaining !== null && Object.is(calculatedDaysRemaining, -0)
-        ? 0
-        : calculatedDaysRemaining;
+      calculatedDaysRemaining !== null
+        ? Math.max(1, calculatedDaysRemaining)
+        : null;
 
     return {
       ...ingredient,

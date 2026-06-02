@@ -10,6 +10,8 @@ export function validateReceiptText(text: string) {
 
   const hasDate =
     /\b\d{2}\.\d{2}\.\d{4}\b/.test(text) ||
+    /\b\d{2}\.\d{2}\.\d{2}\b/.test(text) ||
+    /\b\d{2}\s*\.\s*\d{2}\s*\.\s*\d{2,4}\b/.test(text) ||
     /\b\d{2}\/\d{2}\/\d{4}\b/.test(text) ||
     /\b\d{4}-\d{2}-\d{2}\b/.test(text);
 
@@ -29,13 +31,29 @@ export function validateReceiptText(text: string) {
     normalizedText.includes("CARD") ||
     normalizedText.includes("EC-CASH") ||
     normalizedText.includes("RECEIPT") ||
-    normalizedText.includes("BON");
+    normalizedText.includes("BON") ||
+    normalizedText.includes("GIROCARD") ||
+    normalizedText.includes("MASTERCARD") ||
+    normalizedText.includes("VISA") ||
+    normalizedText.includes("MWST") ||
+    normalizedText.includes("NETTO");
+
+  const receiptConfidenceScore = [
+    hasEnoughLines,
+    hasDate,
+    hasPrice,
+    hasReceiptKeyword,
+  ].filter(Boolean).length;
 
   const isLikelyReceipt =
-    hasEnoughLines && hasDate && hasPrice && hasReceiptKeyword;
+    hasEnoughLines &&
+    hasPrice &&
+    hasReceiptKeyword &&
+    receiptConfidenceScore >= 3;
 
   return {
     isLikelyReceipt,
+    confidenceScore: receiptConfidenceScore,
     checks: {
       hasEnoughLines,
       hasDate,

@@ -277,7 +277,7 @@ export default function UploadPage() {
             </p>
 
             <p className="mt-2 text-xs font-medium text-[#7a8a75]">
-              Currently optimized for English and German receipt images.
+              Currently optimized for English receipt images.
             </p>
 
             <p className="mt-2 text-xs leading-5 text-[#7d8978]">

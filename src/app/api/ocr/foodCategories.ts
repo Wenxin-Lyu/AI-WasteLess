@@ -33,22 +33,48 @@ export const foodCategories = [
     ],
   },
 
-  {
+    {
     category: "fresh_fish",
     displayName: "Salmon",
     keywords: [
       "LACHS",
       "SALMON",
+      "TROUT",
+    ],
+  },
+
+  {
+    category: "fresh_fish",
+    displayName: "Tuna",
+    keywords: [
       "TUNA",
-      "COD",
+      "THUNF",
+      "THUNF.",
+      "THUNFISCH",
+      "IHUNF",
+      "IHUNF.",
+    ],
+  },
+
+  {
+    category: "fresh_fish",
+    displayName: "Shrimp",
+    keywords: [
       "SHRIMP",
       "PRAWN",
+    ],
+  },
+
+  {
+    category: "fresh_fish",
+    displayName: "Fish",
+    keywords: [
+      "COD",
       "FISH",
       "SARDINE",
       "MACKEREL",
       "SEAFOOD",
       "TILAPIA",
-      "TROUT",
       "CRAB",
       "LOBSTER",
       "MUSSEL",
@@ -60,17 +86,79 @@ export const foodCategories = [
     displayName: "Chicken",
     keywords: [
       "CHICKEN",
-      "BEEF",
-      "PORK",
-      "TURKEY",
-      "HAM",
+      "HÄHN",
+      "HAHN",
+      "HÄHNCHEN",
+      "HÄHN.",
+      "HÄHNCHENBRUST",
+      "BRUST",
+      "BRUS",
+      "BRUS.TF",
+      "BRUSTFILET",
+      "CHICKEN BREAST",
+    ],
+  },
+
+  {
+    category: "fresh_meat",
+    displayName: "Sausage",
+    keywords: [
       "SAUSAGE",
-      "BACON",
-      "LAMB",
-      "DUCK",
-      "MINCE",
+      "WURST",
+      "KABANOS",
+      "KABANAS",
+      "KABANOSSI",
+      "KABANOS.",
+      "KABANAS.",
+      "BRATWURST",
+      "BOCKWURST",
+      "WIENER",
+    ],
+  },
+
+  {
+    category: "fresh_meat",
+    displayName: "Beef",
+    keywords: [
+      "BEEF",
+      "RIND",
+      "RINDFLEISCH",
       "STEAK",
-      "MEAT",
+      "MINCE",
+      "GROUND BEEF",
+    ],
+  },
+
+  {
+    category: "fresh_meat",
+    displayName: "Pork",
+    keywords: [
+      "PORK",
+      "SCHWEIN",
+      "SCHWEINEFLEISCH",
+      "BACON",
+      "SPECK",
+      "HAM",
+      "SCHINKEN",
+      "SCHINKEN",
+    ],
+  },
+
+  {
+    category: "fresh_meat",
+    displayName: "Turkey",
+    keywords: [
+      "TURKEY",
+      "PUTE",
+      "PUTEN",
+      "PUTENBRUST",
+    ],
+  },
+
+  {
+    category: "fresh_meat",
+    displayName: "Salami",
+    keywords: [
       "SALAMI",
     ],
   },
@@ -80,19 +168,50 @@ export const foodCategories = [
     displayName: "Yogurt",
     keywords: [
       "MILK",
-      "JOGHURT",
-      "YOGURT",
-      "CHEESE",
-      "BUTTER",
-      "CREAM",
+      "MILCH",
       "NATURJOGHURT",
+      "NATURJOGURT",
+      "JOGHURT",
+      "JOGURT",
+      "YOGURT",
+      "YOGHURT",
+      "SKYR",
+      "KEFIR",
+    ],
+  },
+
+  {
+    category: "dairy",
+    displayName: "Cheese",
+    keywords: [
+      "CHEESE",
+      "MORAVIA",
+      "GRAN MORAVIA",
+      "GOUDA",
+      "EMMENTAL",
+      "CAMEMBERT",
+      "BRIE",
+      "FRISCHKÄSE",
+      "FRISCHKAESE",
+      "COTTAGE CHEESE",
+      "QUARK",
+      "KÄSE",
+      "KAESE",
       "MOZZARELLA",
       "CHEDDAR",
       "PARMESAN",
       "FETA",
       "RICOTTA",
-      "SKYR",
-      "KEFIR",
+    ],
+  },
+
+  {
+    category: "dairy",
+    displayName: "Butter",
+    keywords: [
+      "BUTTER",
+      "CREAM",
+      "SAHNE",
     ],
   },
 
@@ -102,7 +221,6 @@ export const foodCategories = [
     keywords: [
       "EGG",
       "EIER",
-      "EI",
       "OMELETTE",
       "SCRAMBLED EGG",
     ],
@@ -112,8 +230,13 @@ export const foodCategories = [
     category: "tomatoes",
     displayName: "Tomato",
     keywords: [
+      "TOM.",
+      "TOM",
       "TOMATE",
+      "TOMATEN",
       "TOMATO",
+      "DATTELTOMATEN",
+      "DATTEL TOMATEN",
       "RISPENTOMATE",
       "CHERRY TOMATO",
       "PLUM TOMATO",
@@ -126,13 +249,44 @@ export const foodCategories = [
     keywords: [
       "POTATO",
       "KARTOFFEL",
+      "KARTOFFELN",
+      "SWEET POTATO",
+    ],
+  },
+
+  {
+    category: "root_vegetables",
+    displayName: "Carrot",
+    keywords: [
       "CARROT",
+      "KAROTTE",
+      "KAROTTEN",
+      "MÖHRE",
+      "MOEHRE",
+      "MÖHREN",
+      "MOEHREN",
+    ],
+  },
+
+  {
+    category: "root_vegetables",
+    displayName: "Onion",
+    keywords: [
       "ONION",
+      "ZWIEBEL",
+      "ZWIEBELN",
       "GARLIC",
+      "KNOBLAUCH",
+    ],
+  },
+
+  {
+    category: "root_vegetables",
+    displayName: "Root Vegetable",
+    keywords: [
       "BEETROOT",
       "RADISH",
       "TURNIP",
-      "SWEET POTATO",
       "GINGER",
       "PARSNIP",
     ],
@@ -155,18 +309,52 @@ export const foodCategories = [
 
   {
     category: "fruit",
-    displayName: "Fruit",
+    displayName: "Apple",
     keywords: [
       "APPLE",
+      "APFEL",
+      "ÄPFEL",
+      "AEPFEL",
+    ],
+  },
+
+  {
+    category: "fruit",
+    displayName: "Banana",
+    keywords: [
       "BANANA",
+      "BANANE",
+      "BANANEN",
+    ],
+  },
+
+  {
+    category: "fruit",
+    displayName: "Orange",
+    keywords: [
       "ORANGE",
+      "ORANGEN",
+      "MANDARIN",
+      "CLEMENTINE",
+    ],
+  },
+
+  {
+    category: "fruit",
+    displayName: "Fruit",
+    keywords: [
       "PEAR",
+      "BIRNE",
       "MANGO",
       "GRAPE",
+      "TRAUBEN",
       "KIWI",
       "PEACH",
+      "PFIRSICH",
       "PINEAPPLE",
+      "ANANAS",
       "LEMON",
+      "ZITRONE",
       "LIME",
       "MELON",
       "WATERMELON",
@@ -179,20 +367,76 @@ export const foodCategories = [
 
   {
     category: "vegetables",
-    displayName: "Vegetable",
+    displayName: "Broccoli",
     keywords: [
       "BROCCOLI",
-      "CAULIFLOWER",
-      "ZUCCHINI",
+      "BROKKOLI",
+      "BROKOLI",
+    ],
+  },
+
+  {
+    category: "vegetables",
+    displayName: "Cucumber",
+    keywords: [
       "CUCUMBER",
+      "GURKE",
+      "GURKEN",
+    ],
+  },
+
+  {
+    category: "vegetables",
+    displayName: "Pepper",
+    keywords: [
       "PEPPER",
       "PAPRIKA",
+    ],
+  },
+
+  {
+    category: "vegetables",
+    displayName: "Mushroom",
+    keywords: [
       "MUSHROOM",
+      "CHAMPIGNON",
+      "CHAMPIGNONS",
+      "PILZ",
+      "PILZE",
+    ],
+  },
+
+    {
+    category: "vegetables",
+    displayName: "Corn",
+    keywords: [
+      "CORN",
+      "MAIS",
+      "SONNENMAIS",
+      "SWEETCORN",
+      "SWEET CORN",
+    ],
+  },
+
+  {
+    category: "vegetables",
+    displayName: "Vegetable",
+    keywords: [
+      "CAULIFLOWER",
+      "BLUMENKOHL",
+      "ZUCCHINI",
+      "COURGETTE",
       "AUBERGINE",
       "EGGPLANT",
-      "CORN",
       "PEAS",
+      "ERBSEN",
       "BEAN",
+      "BEANS",
+      "BOHNEN",
+      "ASPARAGUS",
+      "SPARGEL",
+      "LEEK",
+      "LAUCH",
     ],
   },
 
@@ -201,18 +445,29 @@ export const foodCategories = [
     displayName: "Bread",
     keywords: [
       "BREAD",
+      "BROT",
+      "BRÖTCHEN",
+      "BROETCHEN",
       "BUN",
       "CROISSANT",
       "TOAST",
       "BAGEL",
-      "CAKE",
-      "MUFFIN",
-      "DONUT",
-      "PIZZA",
+      "ROLL",
       "WRAP",
       "TORTILLA",
       "SANDWICH",
-      "ROLL",
+    ],
+  },
+
+  {
+    category: "bread_bakery",
+    displayName: "Bakery",
+    keywords: [
+      "CAKE",
+      "KUCHEN",
+      "MUFFIN",
+      "DONUT",
+      "PIZZA",
     ],
   },
 
@@ -221,16 +476,119 @@ export const foodCategories = [
     displayName: "Rice",
     keywords: [
       "RICE",
+      "REIS",
+    ],
+  },
+
+  {
+    category: "rice_grains",
+    displayName: "Pasta",
+    keywords: [
       "PASTA",
+      "NUDEL",
+      "NUDELN",
       "NOODLE",
-      "OATS",
-      "QUINOA",
-      "CEREAL",
       "SPAGHETTI",
       "MACARONI",
+    ],
+  },
+
+  {
+    category: "breakfast",
+    displayName: "Cereal",
+    keywords: [
+      "MUESLI",
+      "MÜSLI",
+      "GRANOLA",
+      "CEREAL",
+      "CORNFLAKES",
+      "CHOCO",
+      "CHOCO BALL",
+      "CHOCO BAL",
+      "BREAKFAST",
+      "OATMEAL",
+      "PORRIDGE",
+
+      // oats / grain breakfast
+      "OATS",
+      "HAFER",
+      "HAFERFLOCKEN",
+      "HAFER FLOSSEN",
+      "OVERNIGHT OATS",
+
+      // crunchy cereal
+      "CRUNCHY",
+      "CRUNCH",
+      "CRISPY",
+      "KNUSPER",
+      "KNUSPERMÜSLI",
+      "KNUSPER MUESLI",
+
+      // corn cereals
+      "CORN",
+      "CORN FLAKES",
+      "KELLOGGS",
+      "KELLOGG",
+      "FROSTIES",
+      "SMACKS",
+
+      // chocolate cereals
+      "CHOCAPIC",
+      "NESQUIK",
+      "LION CEREAL",
+      "CHOCO KRISPIES",
+      "CHOC KRISPIES",
+
+      // healthy breakfast
+      "BRAN",
+      "ALL BRAN",
+      "FIBER",
+      "FIBRE",
+      "WHOLEGRAIN",
+      "WHOLE GRAIN",
+      "VOLLKORN",
+      "VOLKORN",
+
+      // kids cereal
+      "HONEY LOOPS",
+      "LOOPS",
+      "RINGS",
+      "BALLS",
+
+      // protein breakfast
+      "PROTEIN MUESLI",
+      "PROTEIN GRANOLA",
+      "PROTEIN CEREAL",
+
+      // yogurt toppings
+      "TOPPING",
+      "BREAKFAST MIX",
+      "BREAKFAST BOWL",
+    ],
+  },
+
+  {
+    category: "rice_grains",
+    displayName: "Grain",
+    keywords: [
+      "OATS",
+      "HAFER",
+      "QUINOA",
+      "CEREAL",
+      "MÜSLI",
+      "MUESLI",
       "COUSCOUS",
       "BULGUR",
       "BARLEY",
+      "VOLLKORN",
+      "VOL I KORN",
+      "VOLL KORN",
+      "WHOLEGRAIN",
+      "WHOLE GRAIN",
+      "FARFALLE",
+      "FAR.",
+      "FUSILLI",
+      "PENNE",
     ],
   },
 
@@ -239,7 +597,12 @@ export const foodCategories = [
     displayName: "Frozen Food",
     keywords: [
       "FROZEN",
+      "TIEFKÜHL",
+      "TIEFKUEHL",
+      "TK",
       "ICE CREAM",
+      "EIS",
+      "ICE",
       "FROZEN PIZZA",
       "FROZEN VEG",
       "FROZEN FRIES",
@@ -252,6 +615,8 @@ export const foodCategories = [
     displayName: "Canned Food",
     keywords: [
       "CANNED",
+      "DOSE",
+      "DOSEN",
       "BEANS",
       "TUNA CAN",
       "CORN CAN",
@@ -264,19 +629,68 @@ export const foodCategories = [
 
   {
     category: "snacks",
+    displayName: "Chips",
+    keywords: [
+      "POTATO CHIPS",
+      "TORTILLA CHIPS",
+      "PRINGLES",
+      "CRISPS", 
+    ],
+  },
+
+  {
+    category: "snacks",
+    displayName: "Chocolate",
+    keywords: [
+      "CHOCOLATE",
+      "CHOCO",
+      "SCHOKO",
+    ],
+  },
+
+  {
+    category: "snacks",
     displayName: "Snack",
     keywords: [
-      "CHIPS",
       "COOKIE",
-      "CHOCOLATE",
       "CRACKER",
       "SNACK",
       "BISCUIT",
+      "KEKS",
       "POPCORN",
       "CANDY",
       "NUTS",
+      "WALNUSS",
       "ALMOND",
       "CASHEW",
+    ],
+  },
+
+  {
+    category: "beverages",
+    displayName: "Water",
+    keywords: [
+      "WATER",
+      "WASSER",
+    ],
+  },
+
+  {
+    category: "beverages",
+    displayName: "Plant Milk",
+    keywords: [
+      "MANDEL",
+      "MAND",
+      "ALMOND MILK",
+      "OAT MILK",
+      "HAFERDRINK",
+      "HAFER DRINK",
+      "SOYA MILK",
+      "SOJADRINK",
+      "WALN",
+      "WALNUSS",
+      "WALNUT MILK",
+      "MAND/WALN",
     ],
   },
 
@@ -285,10 +699,12 @@ export const foodCategories = [
     displayName: "Drink",
     keywords: [
       "JUICE",
+      "SAFT",
       "COLA",
-      "WATER",
       "COFFEE",
+      "KAFFEE",
       "TEA",
+      "TEE",
       "SODA",
       "SMOOTHIE",
       "ENERGY DRINK",
@@ -306,12 +722,14 @@ export const foodCategories = [
       "KETCHUP",
       "MAYO",
       "MUSTARD",
+      "SENF",
       "SOY SAUCE",
       "HOT SAUCE",
       "PESTO",
       "CURRY PASTE",
       "DRESSING",
       "VINEGAR",
+      "ESSIG",
     ],
   },
 
@@ -320,12 +738,14 @@ export const foodCategories = [
     displayName: "Spice",
     keywords: [
       "SALT",
+      "SALZ",
       "PEPPER",
       "PAPRIKA POWDER",
       "CURRY",
       "OREGANO",
       "BASIL",
       "CINNAMON",
+      "ZIMT",
       "SPICE",
       "HERB",
     ],

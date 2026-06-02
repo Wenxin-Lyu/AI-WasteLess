@@ -94,9 +94,9 @@ Responsible for:
 
 ---
  
-## Receipt Validation 
+## Receipt Validation  
 
-Uploaded images are validated before entering the AI workflow to reduce false OCR detection from non-receipt images. The current OCR workflow primarily supports English receipts with partial German receipt support. 
+Uploaded images are validated before entering the AI workflow to reduce false OCR detection from non-receipt images. The current OCR workflow is primarily optimized for English-language receipts.
 
 ---
 
@@ -156,7 +156,7 @@ AI-WasteLess supports:
 Future development directions include:
 
 - inventory tracking and persistent ingredient memory
-- AI-powered food waste prediction
+- machine learning-driven food waste prediction
 - personalized shopping assistance
 - sustainability analytics
 - grocery ecosystem integration
