@@ -246,7 +246,7 @@ export default function UploadPage() {
           <div className="mb-4 text-6xl">🧾</div>
 
           <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-[#0b4a29] sm:text-5xl">
-            Upload Your Grocery Receipt
+            Upload Your Receipt
           </h1>
 
           <p className="mt-5 text-lg leading-8 text-[#5f6f63]">
