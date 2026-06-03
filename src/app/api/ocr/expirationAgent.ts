@@ -32,6 +32,11 @@ const expirationDatabase: Record<string, ExpirationInfo> = {
     wasteRisk: "High",
   },
 
+  prepared_food: {
+    shelfLifeDays: 3,
+    wasteRisk: "High",
+  }, 
+
   dairy: {
     shelfLifeDays: 10,
     wasteRisk: "Medium",
